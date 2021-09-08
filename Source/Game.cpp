@@ -5,18 +5,6 @@ namespace Poker
     Game::Game()
     {
         mtEngine.seed();
-
-        for (u8 i = 0; i < Card::NumSuits; i++)
-        {
-            for (u8 j = 0; j < Card::NumValues; j++)
-            {
-                Card newCard;
-                newCard.suit = i;
-                newCard.value = j;
-
-                mainDeck[Card::NumValues * i + j] = newCard;
-            }
-        }
     }
 
 
@@ -79,9 +67,11 @@ namespace Poker
 
     Card Game::RandomCard()
     {
-        const u8 suit = mtEngine() % Card::NumSuits;
-        const u8 value = mtEngine() % Card::NumValues;
-        return mainDeck[Card::NumValues * suit + value];
+        Card newCard;
+        newCard.suit = mtEngine() % Card::NumSuits;
+        newCard.value = mtEngine() % Card::NumValues;
+
+        return newCard;
     }
 
 

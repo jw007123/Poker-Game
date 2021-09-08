@@ -39,7 +39,6 @@ namespace Poker
                                      0x5555555555555555, 17,
                                      0x71d67fffeda60000, 37,
                                      0xfff7eee000000000, 43, 6364136223846793005> mtEngine;
-        Card mainDeck[Card::NumSuits * Card::NumValues];
         u8 cardInDeck[Card::NumSuits * Card::NumValues];
     };
 }

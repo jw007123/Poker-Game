@@ -13,7 +13,7 @@ int main()
 
     // Determine user's pot
     usize userPot;
-    std::cout << "Loading poker game! Enter starting pot amount: ";
+    std::cout << "Loading poker game! Enter starting pot amount: $";
     std::cin >> userPot;
     std::cin.clear();
 
@@ -75,7 +75,7 @@ int main()
         if (userPot <= Poker::Game::Cost)
         {
             // Out of money
-            std::cout << "Not enough money to continue... Current balance of $" << ((i16)userPot - 2) << " is less than ";
+            std::cout << "Not enough money to continue... Current balance of $" << ((i32)userPot - Poker::Game::Cost) << " is less than ";
             std::cout << "the $" << Poker::Game::Cost << " price of a game. Thanks for playing!";
             break;
         }

@@ -158,7 +158,8 @@ namespace Poker
 
     usize ScoreHand(const Card hand_[5])
     {
-        bool(*FindFuncs[6]) (const Card hand[5]) =
+        // Order is important. A full house implies a pair, but a pair doesn't imply a full house...
+        constexpr bool(*FindFuncs[6]) (const Card hand[5]) =
         {
             FindFourOfAKind,
             FindStraight,
@@ -168,7 +169,7 @@ namespace Poker
             FindPair
         };
 
-        u8 Scores[6] = 
+        constexpr u8 Scores[6] = 
         {
             12,
             10,
@@ -178,7 +179,7 @@ namespace Poker
             2
         };
 
-        const char* ScoreStrings[6] = 
+        constexpr const char* ScoreStrings[6] = 
         {
             "Four of a Kind",
             "Straight",
@@ -192,12 +193,12 @@ namespace Poker
         {
             if ((*FindFuncs[i])(hand_))
             {
-                std::cout << "The deck has a " << ScoreStrings[i] << "!" << std::endl;
+                std::cout << "The hand has a " << ScoreStrings[i] << "!" << std::endl;
                 return Scores[i];
             }
         }
 
-        std::cout << "No winning combinations in the deck!" << std::endl;
+        std::cout << "No winning combinations in the hand!" << std::endl;
         return 0;
     }
 }
