@@ -61,7 +61,40 @@ namespace Poker
 
     bool FindFullHouse(const Card hand_[5])
     {
-        return FindThreeOfAKind(hand_) && FindPair(hand_);
+        u8 tokVal = Card::NumValues;
+        for (u8 i = 0; i < 5; ++i)
+        {
+            for (u8 j = i + 1; j < 5; ++j)
+            {
+                for (u8 k = i + j + 1; k < 5; ++k)
+                {
+                    // Transitive property
+                    if (hand_[i].value == hand_[j].value &&
+                        hand_[j].value == hand_[k].value)
+                    {
+                        tokVal = hand_[i].value;
+                    }
+                }
+            }
+        }
+
+        if (tokVal == Card::NumValues)
+        {
+            return false;
+        }
+
+        for (u8 i = 0; i < 5; ++i)
+        {
+            for (u8 j = i + 1; j < 5; ++j)
+            {
+                if (hand_[i].value == hand_[j].value)
+                {
+                    return hand_[i].value != tokVal;
+                }
+            }
+        }
+        
+        return false;
     }
 
 

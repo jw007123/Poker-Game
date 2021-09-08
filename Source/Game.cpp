@@ -45,7 +45,7 @@ namespace Poker
         
         // Pick random card and return result
         const Card card = RandomCard();
-        std::cout << "The drawn card is the " << Card::ValueStrings[card.value] << " of " << Card::SuitStrings[card.suit] << "!" << std::endl;
+        std::cout << std::endl << "The drawn card is the " << Card::ValueStrings[card.value] << " of " << Card::SuitStrings[card.suit] << "!" << std::endl;
 
         const u8 halfValues = round((f64)Card::NumValues * 0.5);
         return (card.value != halfValues) && ((lhChar == 'L' && card.value < halfValues) || (lhChar == 'H' && card.value > halfValues));
@@ -66,6 +66,10 @@ namespace Poker
             playerHand[i] = DrawCard();
             std::cout << Card::ValueStrings[playerHand[i].value] << " of " << Card::SuitStrings[playerHand[i].suit] << std::endl;
         }
+
+        // Give 2 opportunities to swap cards
+        LockOrSwap(playerHand);
+        LockOrSwap(playerHand);
 
         // Return the final score
         std::cout << std::endl;
@@ -91,5 +95,49 @@ namespace Poker
         cardInDeck[Card::NumValues * newCard.suit + newCard.value] = 0;
 
         return newCard;
+    }
+
+
+    void Game::LockOrSwap(Card hand_[5])
+    {
+        std::cout << std::endl;
+
+        u8 lockedCards[5];
+        memset(lockedCards, 0, 5);
+
+        // Perform lock/swap querying
+        while (1)
+        {
+            usize lsNum;
+            std::cout << "Enter 1-5 to lock that card or 0 to continue and replace unlocked cards: ";
+            std::cin >> lsNum;
+
+            if (lsNum == 0)
+            {
+                break;
+            }
+
+            lsNum -= 1;
+            for (u8 i = 0; i < 5; ++i)
+            {
+                if (lsNum == i)
+                {
+                    lockedCards[i] = 1;
+                    break;
+                }
+            }
+        }
+
+        // Replace unlocked cards and print results
+        std::cout << std::endl << "Your new hand is..." << std::endl << std::endl;
+        for (u8 i = 0; i < 5; ++i)
+        {
+            if (!lockedCards[i])
+            {
+                hand_[i] = DrawCard();
+            }
+
+            std::cout << Card::ValueStrings[hand_[i].value] << " of " << Card::SuitStrings[hand_[i].suit] << std::endl;
+        }
     }
 }

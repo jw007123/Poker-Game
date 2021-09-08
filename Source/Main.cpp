@@ -17,11 +17,11 @@ int main()
     std::cin >> userPot;
     std::cin.clear();
 
-    if (userPot < theGame.GetGameCost())
+    if (userPot < Poker::Game::Cost)
     {
-        std::cout << "Given pot value is less than game cost at $" << theGame.GetGameCost() << "! ";
-        std::cout << "Setting value ot pot to be equal to $" << theGame.GetGameCost() << ".";
-        userPot = theGame.GetGameCost();
+        std::cout << "Given pot value is less than game cost at $" << Poker::Game::Cost << "! ";
+        std::cout << "Setting value ot pot to be equal to $" << Poker::Game::Cost << ".";
+        userPot = Poker::Game::Cost;
     }
 
     while (1)
@@ -31,6 +31,7 @@ int main()
         // Play a game
         usize gameWinnings = theGame.Play();
         const bool hasWon = gameWinnings != 0;
+        std::cout << std::endl;
 
         if (hasWon)
         {
@@ -71,17 +72,17 @@ int main()
 
         // Add to pot
         userPot += gameWinnings;
-        if (userPot <= theGame.GetGameCost())
+        if (userPot <= Poker::Game::Cost)
         {
             // Out of money
             std::cout << "Not enough money to continue... Current balance of $" << ((i16)userPot - 2) << " is less than ";
-            std::cout << "the $" << theGame.GetGameCost() << " price of a game. Thanks for playing!";
+            std::cout << "the $" << Poker::Game::Cost << " price of a game. Thanks for playing!";
             break;
         }
-        userPot -= theGame.GetGameCost();
+        userPot -= Poker::Game::Cost;
 
         // Output current pot value and continue if user wants to play again
-        std::cout << "Deducting game price of $" << theGame.GetGameCost() << " from pot. Current pot amount: $" << userPot << std::endl;
+        std::cout << "Deducting game price of $" << Poker::Game::Cost << " from pot. Current pot amount: $" << userPot << std::endl;
         bool gameOver = false;
         while (1)
         {

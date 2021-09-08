@@ -22,7 +22,7 @@ namespace Poker
         usize Play();
 
         /// The actual cost of playing the game
-        inline usize GetGameCost() const { return 2; }
+        static constexpr usize Cost = 2;
 
     private:
         /// Picks a card at random. Doesn't consider deck logic
@@ -30,6 +30,9 @@ namespace Poker
 
         /// Draws a card from the deck
         Card DrawCard();
+
+        /// Performs the lock/swap logic
+        void LockOrSwap(Card hand_[5]);
 
         std::mersenne_twister_engine<std::uint_fast64_t, 64, 312, 156, 31,
                                      0xb5026f5aa96619e9, 29,
