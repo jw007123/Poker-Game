@@ -111,6 +111,7 @@ namespace Poker
             usize lsNum;
             std::cout << "Enter 1-5 to lock that card or 0 to continue and replace unlocked cards: ";
             std::cin >> lsNum;
+            std::cin.clear();
 
             if (lsNum == 0)
             {
