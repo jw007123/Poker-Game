@@ -1,6 +1,7 @@
 #include "Literals.h"
 #include "Card.h"
 
+#include "Scoring.cpp"
 #include "Game.cpp"
 
 #include <iostream>
@@ -12,7 +13,7 @@ int main()
 
     // Determine user's pot
     usize userPot;
-    std::cout << " Loading poker game! Enter starting pot amount: ";
+    std::cout << "Loading poker game! Enter starting pot amount: ";
     std::cin >> userPot;
     std::cin.clear();
 
@@ -25,7 +26,7 @@ int main()
 
     while (1)
     {
-        std::cout << std::endl << std::endl;
+        std::cout << std::endl;
 
         // Play a game
         usize gameWinnings = theGame.Play();

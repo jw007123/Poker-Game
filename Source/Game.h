@@ -2,6 +2,7 @@
 
 #include "Literals.h"
 #include "Card.h"
+#include "Scoring.h"
 
 #include <random>
 #include <iostream>
@@ -24,6 +25,9 @@ namespace Poker
         inline usize GetGameCost() const { return 2; }
 
     private:
+        /// Picks a card at random. Doesn't consider deck logic
+        Card RandomCard();
+
         /// Draws a card from the deck
         Card DrawCard();
 
@@ -32,6 +36,7 @@ namespace Poker
                                      0x5555555555555555, 17,
                                      0x71d67fffeda60000, 37,
                                      0xfff7eee000000000, 43, 6364136223846793005> mtEngine;
-        Card mainDeck[52];
+        Card mainDeck[Card::NumSuits * Card::NumValues];
+        u8 cardInDeck[Card::NumSuits * Card::NumValues];
     };
 }

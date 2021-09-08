@@ -14,10 +14,10 @@ namespace Poker
 
         static constexpr const char* SuitStrings[NumSuits] =
         {
-            "Heart",
-            "Spade",
-            "Club",
-            "Diamond"
+            "Hearts",
+            "Spades",
+            "Clubs",
+            "Diamonds"
         };
 
         static constexpr const char* ValueStrings[NumValues] =
