@@ -3,6 +3,7 @@
 #include "Literals.h"
 #include "Card.h"
 #include "Scoring.h"
+#include "IOHelper.h"
 
 #include <random>
 #include <iostream>

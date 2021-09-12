@@ -18,25 +18,14 @@ namespace Poker
         std::cout << std::endl << "Playing Double or Nothing! ";
 
         // Get user's choice
-        char lhChar;
-        while (1)
-        {
-            std::cout << "Do you think that the card will be low or high [L/H]: ";
-            std::cin >> lhChar;
-            std::cin.clear();
-            
-            if (lhChar == 'L' || lhChar == 'H')
-            {
-                break;
-            }
-        }
+        const bool choseLow = HandleDecision("Do you think that the card will be low or high", 'L', 'H');
         
         // Pick random card and return result
         const Card card = RandomCard();
         std::cout << std::endl << "The drawn card is the " << Card::ValueStrings[card.value] << " of " << Card::SuitStrings[card.suit] << "!" << std::endl;
 
         const u8 halfValues = round((f64)Card::NumValues * 0.5);
-        return (card.value != halfValues) && ((lhChar == 'L' && card.value < halfValues) || (lhChar == 'H' && card.value > halfValues));
+        return (card.value != halfValues) && ((choseLow && card.value < halfValues) || (!choseLow && card.value > halfValues));
     }
 
 

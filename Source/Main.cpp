@@ -1,6 +1,7 @@
 #include "Literals.h"
 #include "Card.h"
 
+#include "IOHelper.cpp"
 #include "Scoring.cpp"
 #include "Game.cpp"
 
@@ -40,12 +41,8 @@ int main()
             // Perform double or nothing
             while (1)
             {
-                char ynChar;
-                std::cout << "Attempt to double winnings [Y/N]: ";
-                std::cin >> ynChar;
-                std::cin.clear();
-
-                if (ynChar == 'Y')
+                const bool playHL = Poker::HandleDecision("Attempt to double winnings", 'Y', 'N');
+                if (playHL)
                 {
                     const bool x2Win = theGame.DoubleOrNothing();
                     if (x2Win)
@@ -61,7 +58,7 @@ int main()
                         break;
                     }
                 }
-                else if (ynChar == 'N')
+                else
                 {
                     // Keep pot unchanged
                     std::cout << std::endl;
@@ -83,26 +80,9 @@ int main()
 
         // Output current pot value and continue if user wants to play again
         std::cout << "Deducting game price of $" << Poker::Game::Cost << " from pot. Current pot amount: $" << userPot << std::endl;
-        bool gameOver = false;
-        while (1)
-        {
-            char ynChar;
-            std::cout << "Do you want to play again [Y/N]: ";
-            std::cin >> ynChar;
-            std::cin.clear();
 
-            if (ynChar == 'Y')
-            {
-                break;
-            }
-            else if (ynChar == 'N')
-            {
-                gameOver = true;
-                break;
-            }
-        }
-      
-        if (gameOver)
+        const bool playAgain = Poker::HandleDecision("Do you want to play again", 'Y', 'N');
+        if (!playAgain)
         {
             break;
         }
